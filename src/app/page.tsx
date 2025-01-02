@@ -94,13 +94,17 @@ function PushNotificationManager() {
   )
 }
 
+interface Window {
+  MSStream?: unknown;
+}
+
 function InstallPrompt() {
   const [isIOS, setIsIOS] = useState(false)
   const [isStandalone, setIsStandalone] = useState(false)
  
   useEffect(() => {
     setIsIOS(
-      /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream
+      /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as Window).MSStream
     )
  
     setIsStandalone(window.matchMedia('(display-mode: standalone)').matches)
@@ -120,7 +124,7 @@ function InstallPrompt() {
             {' '}
             ⎋{' '}
           </span>
-          and then "Add to Home Screen"
+          Add to Home Screen
           <span role="img" aria-label="plus icon">
             {' '}
             ➕{' '}

@@ -8,9 +8,9 @@ webpush.setVapidDetails(
   'gHMlJrLA0RsMrbOfntlUqbBSEbk4GkmqxDAu6cD4fLA'
 )
  
-let subscription: PushSubscription | null = null
+let subscription
  
-export async function subscribeUser(sub: PushSubscription) {
+export async function subscribeUser(sub) {
   subscription = sub
   console.log({
     sub
@@ -27,14 +27,24 @@ export async function unsubscribeUser() {
   return { success: true }
 }
  
-export async function sendNotification(message: string) {
+export async function sendNotification(message) {
   if (!subscription) {
     throw new Error('No subscription available')
   }
- 
+
   try {
+
+  const transformedSubscription = {
+    endpoint: subscription.endpoint,
+    expirationTime: subscription.expirationTime || null,
+    keys: {
+      auth: subscription.keys?.auth || "",
+      p256dh: subscription.keys.p256dh || "",
+    },
+  };
+
     await webpush.sendNotification(
-      subscription,
+      transformedSubscription,
       JSON.stringify({
         title: 'Test Notification',
         body: message,
