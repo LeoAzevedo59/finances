@@ -3,15 +3,18 @@
 import webpush from 'web-push'
  
 webpush.setVapidDetails(
-  '<mailto:<xleobtsx@gmail.com>>',
-  process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
-  process.env.VAPID_PRIVATE_KEY!
+  'mailto:<xleobtsx@gmail.com>',
+  'BMgM1RagSexiKc6vCGjFdmsz0i5X-ZlbiKmVgNWtxnrMplztM5OrKhwt7OJSrPyXg0b4mlCowwE6HPcji6JulTo',
+  'gHMlJrLA0RsMrbOfntlUqbBSEbk4GkmqxDAu6cD4fLA'
 )
  
 let subscription: PushSubscription | null = null
  
 export async function subscribeUser(sub: PushSubscription) {
   subscription = sub
+  console.log({
+    sub
+  })
   // In a production environment, you would want to store the subscription in a database
   // For example: await db.subscriptions.create({ data: sub })
   return { success: true }

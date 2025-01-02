@@ -71,12 +71,12 @@ function PushNotificationManager() {
  
   return (
     <div>
-      <h3>Push Notifications</h3>
       {subscription ? (
         <>
           <p>You are subscribed to push notifications.</p>
           <button onClick={unsubscribeFromPush}>Unsubscribe</button>
           <input
+          className='text-black'
             type="text"
             placeholder="Enter notification message"
             value={message}
@@ -87,7 +87,7 @@ function PushNotificationManager() {
       ) : (
         <>
           <p>You are not subscribed to push notifications.</p>
-          <button onClick={subscribeToPush}>Subscribe</button>
+          <button className='text-emerald-500' onClick={subscribeToPush}>Subscribe</button>
         </>
       )}
     </div>
@@ -112,7 +112,6 @@ function InstallPrompt() {
  
   return (
     <div>
-      <h3>Install App</h3>
       <button>Add to Home Screen</button>
       {isIOS && (
         <p>
